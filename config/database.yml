@@ -1,0 +1,14 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 25
+  username: postgres
+  password: pass
+
+development:
+  <<: *default
+  database: eone_dev
+
+test:
+  <<: *default
+  database: eone_test
