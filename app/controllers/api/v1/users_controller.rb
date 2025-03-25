@@ -12,7 +12,7 @@ class Api::V1::UsersController < ApplicationController
 
   def pending_approvals
     users = User.where(role_id: get_role_id(params[:type]), status: :pending)
-    render json: { users: users.select(:id, :name, :status, :mobile_number) }, status: :ok
+    render json: { users: UserBlueprint.render_as_hash(users) }, status: :ok
   end
 
   def approve
@@ -38,7 +38,11 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def index
-    render json: UserBlueprint.render(User.all), status: :ok
+    render json: { users: UserBlueprint.render_as_hash(User.all) }, status: :ok
+  end
+
+  def admin_dashboard_count
+    render json: { pending_approvals_count: User.where(status: :pending, role_id: Role.where(name: [TEACHER, COMPANY]).select(:id)).count, classroom_count: Classroom.count }
   end
 
   private
