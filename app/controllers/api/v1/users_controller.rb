@@ -48,7 +48,7 @@ class Api::V1::UsersController < ApplicationController
   def show
     user = User.find_by id: params[:id]
     if user
-      json: { users: UserBlueprint.render_as_hash(user) }, status: :ok
+      render json: { user: UserBlueprint.render_as_hash(user) }, status: :ok
     else
       render json: { error: 'Invalid user id, user not found' }, status: :not_found
     end
