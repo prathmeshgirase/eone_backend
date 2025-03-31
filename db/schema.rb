@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_22_173002) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_31_105101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_22_173002) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.string "days_list", default: [], array: true
+    t.string "start_time"
+    t.string "end_time"
+    t.bigint "teacher_id"
+    t.bigint "classroom_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["classroom_id"], name: "index_subjects_on_classroom_id"
+    t.index ["teacher_id"], name: "index_subjects_on_teacher_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "name"
@@ -47,6 +60,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_22_173002) do
   end
 
   add_foreign_key "classrooms", "users", column: "teacher_id"
+  add_foreign_key "subjects", "classrooms"
+  add_foreign_key "subjects", "users", column: "teacher_id"
   add_foreign_key "users", "classrooms"
   add_foreign_key "users", "roles"
 end

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
           get :admin_dashboard_count
         end
       end
+
+      resources :subjects
     end
   end
 end

@@ -42,7 +42,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def admin_dashboard_count
-    render json: { pending_approvals_count: User.where(status: :pending, role_id: Role.where(name: [TEACHER, COMPANY]).select(:id)).count, classroom_count: Classroom.count }
+    render json: { pending_approvals_count: User.where(status: :pending, role_id: Role.where(name: [TEACHER, COMPANY]).select(:id)).count, classroom_count: Classroom.count }, status: :ok
   end
 
   private
