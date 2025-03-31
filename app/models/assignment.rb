@@ -1,5 +1,5 @@
 class Assignment < ApplicationRecord
-  belongs_to :classroom
+  belongs_to :subject
 
   has_one_attached :file  # Active Storage for file uploads
 
