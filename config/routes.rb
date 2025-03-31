@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       patch 'users/:id/approve', to: 'users#approve'
       patch 'users/:id/reject', to: 'users#reject'
       get 'pending_approvals', to: 'users#pending_approvals'
+      get 'users/:id/subjects', to: 'subjects#index'
       resources :classrooms, only: [:index, :create]
       resources :users, only: [:index, :show] do
         collection do
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       end
 
       resources :subjects
+      resources :assignments, only: [:create]
     end
   end
 end

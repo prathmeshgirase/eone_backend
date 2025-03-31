@@ -1,4 +1,4 @@
-class SubjectsController < ApplicationController
+class Api::V1::SubjectsController < ApplicationController
   # before_action :authenticate_user! # Ensure the user is logged in (if needed)
 
   def create
@@ -9,6 +9,12 @@ class SubjectsController < ApplicationController
     else
       render json: { errors: subject.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def index
+    user = User.find_by id: params[:id]
+    subjects = Subject.where(teacher_id: user.id)
+    render json: { subjects: SubjectBlueprint.render_as_hash(subjects) }, status: :ok
   end
 
   private
