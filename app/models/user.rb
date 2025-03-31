@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   def api_response(token = nil)
     {
+      id: id,
       email: email,
       name: name,
       mobile_number: mobile_number,
@@ -21,6 +22,7 @@ class User < ApplicationRecord
       date_of_birth: date_of_birth,
       role: role.name,
       classroom: classroom&.name,
+      classroom_id: classroom&.id,
       token: token
     }
   end
