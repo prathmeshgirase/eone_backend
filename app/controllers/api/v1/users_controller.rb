@@ -45,6 +45,15 @@ class Api::V1::UsersController < ApplicationController
     render json: { pending_approvals_count: User.where(status: :pending, role_id: Role.where(name: [TEACHER, COMPANY]).select(:id)).count, classroom_count: Classroom.count }, status: :ok
   end
 
+  def show
+    user = User.find_by id: params[:id]
+    if user
+      json: { users: UserBlueprint.render_as_hash(user) }, status: :ok
+    else
+      render json: { error: 'Invalid user id, user not found' }, status: :not_found
+    end
+  end
+
   private
 
   def user_params

@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       patch 'users/:id/reject', to: 'users#reject'
       get 'pending_approvals', to: 'users#pending_approvals'
       resources :classrooms, only: [:index, :create]
-      resources :users, only: [:index] do
+      resources :users, only: [:index, :show] do
         collection do
           get :admin_dashboard_count
         end
