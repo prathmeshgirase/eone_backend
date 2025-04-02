@@ -48,9 +48,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_31_193122) do
     t.date "due_date"
     t.string "file"
     t.bigint "subject_id", null: false
+    t.bigint "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subject_id"], name: "index_assignments_on_subject_id"
+    t.index ["teacher_id"], name: "index_assignments_on_teacher_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -101,6 +103,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_31_193122) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "assignments", "subjects"
+  add_foreign_key "assignments", "users", column: "teacher_id"
   add_foreign_key "classrooms", "users", column: "teacher_id"
   add_foreign_key "subjects", "classrooms"
   add_foreign_key "subjects", "users", column: "teacher_id"

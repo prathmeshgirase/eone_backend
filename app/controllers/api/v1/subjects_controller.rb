@@ -14,7 +14,7 @@ class Api::V1::SubjectsController < ApplicationController
   def index
     user = User.find_by id: params[:id]
     subjects = Subject.where(teacher_id: user.id)
-    render json: { subjects: SubjectBlueprint.render_as_hash(subjects) }, status: :ok
+    render json: SubjectBlueprint.render_as_hash(subjects), status: :ok
   end
 
   private

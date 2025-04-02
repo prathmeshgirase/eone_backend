@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       end
 
       resources :subjects
-      resources :assignments, only: [:create]
+      resources :assignments, only: [:create, :index]
     end
   end
 end

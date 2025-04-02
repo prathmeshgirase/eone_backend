@@ -6,6 +6,7 @@ class CreateAssignments < ActiveRecord::Migration[7.1]
       t.date :due_date
       t.string :file
       t.references :subject, null: false, foreign_key: true
+      t.references :teacher, foreign_key: { to_table: :users }
 
       t.timestamps
     end
