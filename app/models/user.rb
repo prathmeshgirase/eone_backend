@@ -3,6 +3,9 @@ class User < ApplicationRecord
   has_one :classroom, foreign_key: 'teacher_id', dependent: :destroy
   belongs_to :classroom, optional: true
 
+  has_many :assignment_submissions
+  has_many :assignments, through: :assignment_submissions
+
   has_secure_password  # Enables password encryption
 
   enum status: { pending: 0, approved: 1, rejected: 2 }

@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
       resources :subjects
       resources :assignments, only: [:create, :index]
+      resources :assignment_submissions, only: [:create]
     end
   end
 end

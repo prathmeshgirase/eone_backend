@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assignment: one
+  user: one
+  file: MyString
+
+two:
+  assignment: two
+  user: two
+  file: MyString
