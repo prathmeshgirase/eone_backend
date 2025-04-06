@@ -3,12 +3,10 @@ class  Api::V1::AssignmentsController < ApplicationController
     assignment = Assignment.new(assignment_params)
 
     if assignment.save
-      render json: { message: "Assignment created successfully", assignment: assignment.as_json(except: [:file]) }, status: :created
+      render json: { message: "Assignment created successfully", assignment: assignment.as_json(methods: [:file_url], except: [:file]) }, status: :created
     else
       render json: { errors: assignment.errors.full_messages }, status: :unprocessable_entity
     end
-  rescue Exception => e
-    render json: { errors: 'Unable to submit' }, status: :unprocessable_entity
   end
 
   def index

@@ -3,7 +3,7 @@ class Api::V1::AssignmentSubmissionsController < ApplicationController
     submission = AssignmentSubmission.new(submission_params)
     
     if submission.save
-      render json: { message: "Submission successful", submission: submission }, status: :created
+      render json: { message: "Submission successful", submission: submission.as_json(methods: [:file_url], except: [:file]) }, status: :created
     else
       render json: { errors: submission.errors.full_messages }, status: :unprocessable_entity
     end
