@@ -4,7 +4,7 @@ class Assignment < ApplicationRecord
   has_many :assignment_submissions
   has_many :users, through: :assignment_submissions
 
-  # has_one_attached :file  # Active Storage for file uploads
+  has_one_attached :file  # Active Storage for file uploads
 
   validates :title, presence: true
 

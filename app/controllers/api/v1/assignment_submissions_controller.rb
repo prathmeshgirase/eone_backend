@@ -1,4 +1,4 @@
-class AssignmentSubmissionsController < ApplicationController
+class Api::V1::AssignmentSubmissionsController < ApplicationController
   def create
     submission = AssignmentSubmission.new(submission_params)
     
