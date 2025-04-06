@@ -10,4 +10,8 @@ class AssignmentBlueprint < Blueprinter::Base
   field :teacher_name do |assignment|
     assignment.teacher&.name
   end
+
+  field :file_url do |assignment|
+    Rails.application.routes.url_helpers.url_for(assignment.file) if assignment.file.attached?
+  end
 end
