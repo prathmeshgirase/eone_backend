@@ -11,9 +11,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def pending_approvals
-    if params[:type].eql?(TEACHER)
+    if params[:type].eql?(STUDENT)
       teacher = User.find_by(id: params[:teacher_id])
-      users = User.where(role_id: get_role_id(params[:type], classroom_id: teacher&.classroom_id), status: :pending)
+      users = User.where(role_id: get_role_id(params[:type]), classroom_id: teacher&.classroom_id, status: :pending)
     else
       users = User.where(role_id: get_role_id(params[:type]), status: :pending)
     end
@@ -24,7 +24,7 @@ class Api::V1::UsersController < ApplicationController
   def approved_users
     if params[:type].eql?(TEACHER)
       teacher = User.find_by(id: params[:teacher_id])
-      users = User.where(role_id: get_role_id(params[:type], classroom_id: teacher&.classroom_id), status: :approved)
+      users = User.where(role_id: get_role_id(params[:type]), classroom_id: teacher&.classroom_id, status: :approved)
     else
       users = User.where(role_id: get_role_id(params[:type]), status: :approved)
     end
@@ -60,6 +60,14 @@ class Api::V1::UsersController < ApplicationController
 
   def admin_dashboard_count
     render json: { pending_approvals_count: User.where(status: :pending, role_id: Role.where(name: [TEACHER, COMPANY]).select(:id)).count, classroom_count: Classroom.count }, status: :ok
+  end
+
+  def teacher_dashboard_count
+    teacher_id = params[:id]
+    teacher = User.find_by(id: teacher_id)
+    classroom_id = teacher.classroom_id
+    role_id = Role.find_by name: STUDENT
+    render json: { subject_count: Subject.where(teacher_id:).count, student_count: User.where(classroom_id:, role_id:).count, assignment_count: Assignment.where(teacher_id:).count, pending_approval_count: User.where(classroom_id:, role_id:, status: :pending).count }
   end
 
   def show

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
         collection do
           get :admin_dashboard_count
         end
+
+        member do
+          get :teacher_dashboard_count
+        end
       end
 
       resources :subjects

@@ -13,6 +13,12 @@ class  Api::V1::AssignmentsController < ApplicationController
     if params[:teacher_id].present?
       assignments = Assignment.where(teacher_id: params[:teacher_id])
       render json: AssignmentBlueprint.render_as_hash(assignments), status: :ok
+    elsif params[:student_id].present?
+      student = User.find_by id: params[:student_id]
+      classroom = student.classroom
+      subject_ids = classroom.subjects.ids
+      assignments = Assignment.where(subject_id: subject_ids)
+      render json: AssignmentBlueprint.render_as_hash(assignments), status: :ok
     end
   end
 
