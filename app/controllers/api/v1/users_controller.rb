@@ -13,9 +13,9 @@ class Api::V1::UsersController < ApplicationController
   def pending_approvals
     if params[:type].eql?(STUDENT)
       teacher = User.find_by(id: params[:teacher_id])
-      users = User.where(role_id: get_role_id(params[:type]), classroom_id: teacher&.classroom_id, status: :pending)
+      users = User.where(role_id: get_role_id(params[:type]), classroom_id: teacher&.classroom_id, status: :pending).non_admin
     else
-      users = User.where(role_id: get_role_id(params[:type]), status: :pending)
+      users = User.where(role_id: get_role_id(params[:type]), status: :pending).non_admin
     end
 
     render json: { users: UserBlueprint.render_as_hash(users) }, status: :ok

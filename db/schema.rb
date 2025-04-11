@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_06_103626) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_08_175333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_06_103626) do
     t.index ["teacher_id"], name: "index_classrooms_on_teacher_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "assignment_id"
+    t.bigint "teacher_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "message"
+    t.datetime "read_at"
+    t.index ["assignment_id"], name: "index_notifications_on_assignment_id"
+    t.index ["teacher_id"], name: "index_notifications_on_teacher_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -117,6 +130,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_06_103626) do
   add_foreign_key "assignments", "subjects"
   add_foreign_key "assignments", "users", column: "teacher_id"
   add_foreign_key "classrooms", "users", column: "teacher_id"
+  add_foreign_key "notifications", "assignments"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "notifications", "users", column: "teacher_id"
   add_foreign_key "subjects", "classrooms"
   add_foreign_key "subjects", "users", column: "teacher_id"
   add_foreign_key "users", "classrooms"

@@ -3,6 +3,7 @@ class Assignment < ApplicationRecord
   belongs_to :teacher, class_name: 'User'
   has_many :assignment_submissions
   has_many :users, through: :assignment_submissions
+  has_many :notifications
 
   has_one_attached :file  # Active Storage for file uploads
 

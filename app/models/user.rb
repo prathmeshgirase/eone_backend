@@ -6,9 +6,14 @@ class User < ApplicationRecord
   has_many :assignment_submissions
   has_many :assignments, through: :assignment_submissions
 
+  has_many :notifications, foreign_key: :user_id
+  has_many :sent_notifications, class_name: 'Notification', foreign_key: :teacher_id
+
   has_secure_password  # Enables password encryption
 
   enum status: { pending: 0, approved: 1, rejected: 2 }
+
+  scope :non_admin, -> { where.not(role: Role.find_by(name: ADMIN)) }
 
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :name, presence: true
