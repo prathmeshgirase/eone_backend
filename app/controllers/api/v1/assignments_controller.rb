@@ -3,6 +3,8 @@ class  Api::V1::AssignmentsController < ApplicationController
     assignment = Assignment.new(assignment_params)
 
     if assignment.save
+      teacher = assignment.teacher
+      Notification.create(teacher_id: assignment.teacher_id, assignment_id: assignment.id, message: "#{teacher.name} has submitted a new assignment: #{assignment.title}")
       render json: { message: "Assignment created successfully", assignment: assignment.as_json(methods: [:file_url], except: [:file]) }, status: :created
     else
       render json: { errors: assignment.errors.full_messages }, status: :unprocessable_entity

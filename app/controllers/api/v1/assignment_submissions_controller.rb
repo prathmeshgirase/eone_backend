@@ -3,7 +3,8 @@ class Api::V1::AssignmentSubmissionsController < ApplicationController
     submission = AssignmentSubmission.new(submission_params)
     assignment = Assignment.find submission.assignment_id
     if submission.save
-      Notification.create(assignment_id: submission.assignment_id, teacher_id: assignment.teacher_id, user_id: submission.user_id)
+      user = User.find_by id: submission.user_id
+      Notification.create(user_id: submission.user_id, assignment_id: submission.assignment_id, message: "#{user.name} has completed a assignment: #{assignment.title}. Please review it.")
       render json: { message: "Submission successful", submission: submission.as_json(methods: [:file_url], except: [:file]) }, status: :created
     else
       render json: { errors: submission.errors.full_messages }, status: :unprocessable_entity

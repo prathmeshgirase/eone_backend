@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       get 'roles', to: 'roles#index'
       patch 'users/:id/approve', to: 'users#approve'
       patch 'users/:id/reject', to: 'users#reject'
-      get '/users/:id/notifications', to: 'notifications#user_notifications'
+      get '/users/:id/notifications', to: 'notifications#index'
       get 'pending_approvals', to: 'users#pending_approvals'
       get 'approved_users', to: 'users#approved_users'
       get 'users/:id/subjects', to: 'subjects#index'
