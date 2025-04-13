@@ -1,6 +1,7 @@
 class Api::V1::AssignmentSubmissionsController < ApplicationController
   def create
     submission = AssignmentSubmission.new(submission_params)
+    assignment = Assignment.find submission.assignment_id
     if submission.save
       Notification.create(assignment_id: submission.assignment_id, teacher_id: assignment.teacher_id, user_id: submission.user_id)
       render json: { message: "Submission successful", submission: submission.as_json(methods: [:file_url], except: [:file]) }, status: :created
