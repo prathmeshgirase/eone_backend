@@ -3,6 +3,6 @@ class Classroom < ApplicationRecord
   has_many :students, class_name: 'User', foreign_key: 'classroom_id'
   has_many :subjects
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
   validates :is_active, inclusion: { in: [true, false] }
 end
