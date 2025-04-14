@@ -1,7 +1,7 @@
 class SubmissionBlueprint < Blueprinter::Base
   identifier :id
 
-  fields :student_name, :created_at, :file_url, :marks, :status
+  fields :student_name, :created_at, :file_url, :marks, :status, :grade
 
   field :student_name do |submission|
     submission.user.name

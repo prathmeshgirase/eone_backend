@@ -27,7 +27,7 @@ Rails.application.routes.draw do
           get :submissions
         end
       end
-      resources :assignment_submissions, only: [:create]
+      resources :assignment_submissions, only: [:create, :update]
     end
   end
 end

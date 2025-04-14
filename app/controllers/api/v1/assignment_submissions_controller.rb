@@ -11,6 +11,12 @@ class Api::V1::AssignmentSubmissionsController < ApplicationController
     end
   end
 
+  def update
+    submission = AssignmentSubmission.find params[:id]
+    submission.update(marks: params[:marks], grade: params[:grade])
+    render json: { message: "Marks updated successfully", submission: SubmissionBlueprint.render_as_hash(submission) }, status: :ok
+  end
+
   private
 
   def submission_params
