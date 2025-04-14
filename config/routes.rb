@@ -22,7 +22,11 @@ Rails.application.routes.draw do
       end
 
       resources :subjects
-      resources :assignments, only: [:create, :index]
+      resources :assignments, only: [:create, :index] do
+        member do
+          get :submissions
+        end
+      end
       resources :assignment_submissions, only: [:create]
     end
   end

@@ -24,6 +24,12 @@ class  Api::V1::AssignmentsController < ApplicationController
     end
   end
 
+  def submissions
+    assignment = Assignment.find params[:id]
+    submissions = AssignmentSubmission.where(assignment_id: assignment.id)
+    render json: SubmissionBlueprint.render_as_hash(submissions), status: :ok
+  end
+
   private
 
   def assignment_params
