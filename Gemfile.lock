@@ -94,9 +94,9 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     drb (2.2.1)
-    error_highlight (0.7.0)
     erubi (1.13.1)
     ffi (1.17.1)
+    ffi (1.17.1-x64-mingw-ucrt)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -125,7 +125,6 @@ GEM
       benchmark
       logger
     mini_mime (1.1.5)
-    mini_portile2 (2.8.8)
     minitest (5.25.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
@@ -139,18 +138,14 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.18.5)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.18.5-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.18.5-x86_64-darwin)
+    nokogiri (1.18.5-x64-mingw-ucrt)
       racc (~> 1.4)
     oj (3.16.10)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     ostruct (0.6.1)
     pg (1.5.9)
+    pg (1.5.9-x64-mingw-ucrt)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -211,6 +206,8 @@ GEM
     timeout (0.4.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2025.2)
+      tzinfo (>= 1.0.0)
     websocket-driver (0.7.7)
       base64
       websocket-extensions (>= 0.1.0)
@@ -218,10 +215,7 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
-  aarch64-linux
-  arm64-darwin
-  x86_64-darwin
-  x86_64-linux
+  x64-mingw-ucrt
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
