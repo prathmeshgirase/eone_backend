@@ -1,0 +1,47 @@
+steps for backend setup:
+
+ruby installer 3.1.2
+
+in ruby installer install MSYS2
+
+then give this cmd gem install psych -v '5.2.3' --platform ruby
+
+bundle install
+
+for run the backend run  rails s -p 3010
+
+
+>rails db:create
+
+>rails db:migrate
+
+>rails c
+
+
+irb(main):001> Role.new
+irb(main):002> Role.create(name:'Student')
+irb(main):004> Role.create(name:'Admin')
+irb(main):005> Role.create(name:'Teacher')
+irb(main):006> Role.create(name:'Company')
+
+irb(main):007> User.create(email: 'admin@gmail.com', name: 'Admin', password: 'admin123', mobile_number: '9876543210', status: :approved, role_id: 2)
+
+irb(main):008> Classroom.new
+
+irb(main):009> Classroom.create(name: "Bsc Computer Science - First Year")
+
+irb(main):010> Classroom.create(name: "Bsc Computer Science - Second Year")
+
+irb(main):011> Classroom.create(name: "Bsc Computer Science - Third Year")
+  
+irb(main):013> exit
+
+
+reset databse rails db:reset
+connect data  rails db:migrate
+
+User.all
+User.find(2).update(password:"teacher@123")
+
+del tmp\pids\server.pid
+
