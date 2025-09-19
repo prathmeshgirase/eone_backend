@@ -1,14 +1,29 @@
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: 25
+#   username: postgres
+#   password: postgres
+
+# development:
+#   <<: *default
+#   database: eone
+
+# test:
+#   <<: *default
+#   database: eone
+
+
 default: &default
   adapter: postgresql
   encoding: unicode
   pool: 25
-  username: postgres
-  password: psql24
+  host: database-1.c98sws2agsxb.ap-south-1.rds.amazonaws.com  
+  port: 5432
+  username: postgres                                   
+  password: postgres                              
 
 development:
   <<: *default
-  database: eone_dev
+  database: eone
 
-test:
-  <<: *default
-  database: eone_test
